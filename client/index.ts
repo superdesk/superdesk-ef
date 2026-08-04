@@ -15,24 +15,6 @@ setTimeout(() => {
                 id: 'datetimeField',
                 load: () => import('superdesk-core/scripts/extensions/datetimeField'),
             },
-            {
-                id: 'broadcasting',
-                load: () => import('superdesk-core/scripts/extensions/broadcasting').then((broadcasting) => {
-                    broadcasting.setCustomizations({
-                        getRundownItemDisplayName: (rundown) => rundown.technical_title,
-                    });
-
-                    return broadcasting;
-                }),
-            },
-            {
-                id: 'availability-manager',
-                load: () => import('superdesk-core/scripts/extensions/availability-manager'),
-            },
-            {
-                id: 'planning-extension',
-                load: () => import('superdesk-planning/client/planning-extension'),
-            },
         ],
         {},
     );
