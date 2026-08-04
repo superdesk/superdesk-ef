@@ -7,16 +7,30 @@
 module.exports = function() {
     return {
         apps: [
-            'superdesk-planning',
-            'superdesk.analytics',
+            'superdesk-publisher',
         ],
         importApps: [
             '../index',
-            'superdesk-planning',
-            'superdesk-analytics',
+            'superdesk-publisher',
         ],
 
         defaultRoute: '/workspace/monitoring',
+
+        publisher: {
+            protocol: 'https',                /* http or https */
+            tenant: '',              /* tenant - semantically subdomain, '' is allowed */
+            domain: 'sp-publisher.superdesk.pro',           /* domain name for the publisher */
+            base: 'api/v2',                  /* api base path */
+
+            wsProtocol: 'wss',                /* ws or wss (websocket); if unspecified or '' defaults to 'wss' */
+            wsDomain: 'sp-publisher.superdesk.pro',  /* domain name (usually domain as above) */
+                                            /* e.g.: example.com, abc.example.com */
+                                            /* tenant, as above, is NOT used for websocket */
+            wsPath: '/ws',                    /* path to websocket root dir */
+            wsPort: '80',                   /* if not specified: defaults to 443 for wss, 80 for ws */
+            hideContentRoutesInPublishPane: false, /* hides routes of type "content" from select box in publish panes in monitoring view as well as in output control. If not specified: defaults to false */
+            hideCustomRoutesInPublishPane: false   /* hides routes of type "custom" from select box in publish panes in monitoring view as well as in output control. If not specified: defaults to false */
+        },
 
         langOverride: {
             en: {
@@ -54,20 +68,15 @@ module.exports = function() {
             customAuthoringTopbar: {
                 toDesk: true,
                 publish: true,
-
-                sendAndDuplicate: {
-                    deskName: 'Test',
-                    stageName: 'Working',
-                },
             },
             validatePointOfInterestForImages: true,
+            editorHighlights: true,
             editFeaturedImage: true,
             searchShortcut: true,
             elasticHighlight: true,
             autorefreshContent: true,
             nestedItemsInOutputStage: false,
             planning: true,
-            sendToPersonal: true,
         },
 
         item_profile: { change_profile: 1 },
@@ -97,7 +106,6 @@ module.exports = function() {
                 'state',
                 'update',
                 'scheduledDateTime',
-                'embargo',
                 'flags',
                 'updated',
                 'provider',
@@ -106,14 +114,7 @@ module.exports = function() {
                 'used',
                 'nestedlink',
                 'translations'
-            ],
-            compactView: {
-                firstLine: [
-                    'headline',
-                    'slugline',
-                ],
-                secondLine: [],
-            },
+            ]
         },
 
         monitoring: {
